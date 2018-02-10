@@ -9,7 +9,7 @@ Curated has a simple ecosystem where **api** and **scheduler** are two distinct 
 ```
 api users
          \
-mobile ----> api -> domain <- scheduler -> github-ql
+mobile ----> api -> domain <- scheduler -> octograph
          /            |                       |
 web                postgres                 github
 ```
