@@ -23,8 +23,6 @@ The following repositories compose the project ecosystem:
 * **scheduler** - github data workers
 * **web** - open data responsive app
 
-## Contributing
-
 Additional repositories supporting development:
 
-* [coding-standards](https://github.com/curated/coding-standards) - shared configurations across all code repositories to help ensure code quality and consistency
+* [coding-standards](https://github.com/curated/coding-standards) - shared configurations across all repositories to help ensure quality and consistency
