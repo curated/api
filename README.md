@@ -18,8 +18,8 @@ The following repositories compose the project ecosystem:
 
 * **api** - open data endpoints
 * [domain](https://github.com/curated/domain) - models and persistence
-* [github-ql](https://github.com/curated/github-ql) - github graph client
 * **mobile** - open data mobile app
+* **octograph** - github graphql client
 * **scheduler** - github data workers
 * **web** - open data responsive app
 
