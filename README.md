@@ -16,11 +16,15 @@ web                postgres                 github
 
 The following repositories compose the project ecosystem:
 
-- **api** - open data endpoints
-- [assets](https://github.com/curated/assets) - images and related assets
-- [docs](https://github.com/curated/docs) - high level documentation
-- [domain](https://github.com/curated/domain) - models and persistence
-- **github-ql** - github graph client
-- **mobile** - open data mobile app
-- **scheduler** - github data workers
-- **web** - open data responsive app
+* **api** - open data endpoints
+* [domain](https://github.com/curated/domain) - models and persistence
+* [github-ql](https://github.com/curated/github-ql) - github graph client
+* **mobile** - open data mobile app
+* **scheduler** - github data workers
+* **web** - open data responsive app
+
+## Contributing
+
+Additional repositories supporting development:
+
+* [coding-standards](https://github.com/curated/coding-standards) - shared configurations across all code repositories to help ensure code quality and consistency
