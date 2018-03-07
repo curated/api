@@ -9,9 +9,9 @@ Curated has a simple ecosystem where **api** and **scheduler** are two distinct 
 ```
 api users
          \
-mobile ----> api -> domain <- scheduler -> octograph
-         /            |                       |
-web                postgres                 github
+mobile ----> api -> domain <- workers -> octograph
+         /            |          |           |
+web                postgres    redis       github
 ```
 
 The following repositories compose the project ecosystem:
@@ -20,8 +20,8 @@ The following repositories compose the project ecosystem:
 * [domain](https://github.com/curated/domain) - models and persistence
 * **mobile** - open data mobile app
 * [octograph](https://github.com/curated/octograph) - github graphql client
-* **scheduler** - github data workers
 * **web** - open data responsive app
+* [workers](https://github.com/curated/workers) - data workers
 
 Additional repositories supporting development:
 
