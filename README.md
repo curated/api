@@ -4,7 +4,7 @@ Curated is an open source & data platform consisting of a curated dataset of Git
 
 ## Architecture
 
-Curated has a simple ecosystem where **api** and **scheduler** are two distinct processes sharing **domain** logic while interfacing with different external components: user interfaces and data operations, respectively.
+Curated has a simple ecosystem where **api** and **workers** are two distinct processes sharing **domain** logic while interfacing with different external components: user interfaces and data operations, respectively.
 
 ```
 api users
