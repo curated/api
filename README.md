@@ -4,24 +4,26 @@ Curated is an open source & data platform consisting of a curated dataset of Git
 
 ## Architecture
 
-Curated has a simple ecosystem where **api** and **workers** are two distinct processes sharing **domain** logic while interfacing with different external components: user interfaces and data operations, respectively.
+Curated has a simple ecosystem where **services** and **workers** are distinct processes sharing **domain** logic while interfacing with different external components: user interfaces and data operations, respectively.
 
 ```
 api users
          \
-mobile ----> api -> domain <- workers -> octograph
-         /            |          |           |
-web                postgres    redis       github
+mobile ----> services -> domain <- workers -> octograph
+         /                 |          |           |
+web                     postgres    redis       github
 ```
 
 The following repositories compose the project ecosystem:
 
-* **api** - open data endpoints
 * [domain](https://github.com/curated/domain) - models and persistence
-* **mobile** - open data mobile app
+* mobile - open data mobile app
 * [octograph](https://github.com/curated/octograph) - github graphql client
-* **web** - open data responsive app
-* [workers](https://github.com/curated/workers) - data workers
+* **services**
+  * [issue-service](https://github.com/curated/issue-service) - open data issue endpoint
+* web - open data responsive app
+* **workers**
+  * [issue-worker](https://github.com/curated/issue-worker) - github issue data worker
 
 Additional repositories supporting development:
 
