@@ -16,14 +16,16 @@ web                     postgres    redis       github
 
 The following repositories compose the project ecosystem:
 
-* [domain](https://github.com/curated/domain) - models and persistence
-* mobile - open data mobile app
-* [octograph](https://github.com/curated/octograph) - github graphql client
+* **core**
+  * [domain](https://github.com/curated/domain) - models and persistence
+  * [octograph](https://github.com/curated/octograph) - github graphql client
 * **services**
   * [issue-service](https://github.com/curated/issue-service) - open data issue endpoint
-* web - open data responsive app
 * **workers**
   * [issue-worker](https://github.com/curated/issue-worker) - github issue data worker
+* **interfaces**
+  * mobile - react native?
+  * web - next.js?
 
 Additional repositories supporting development:
 
