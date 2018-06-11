@@ -1,5 +1,5 @@
 FROM golang:1.10 AS build
-WORKDIR $GOPATH/src/github.com/curated/api
+WORKDIR $GOPATH/src/github.com/curated/elastic
 ADD https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 /usr/bin/dep
 RUN chmod +x /usr/bin/dep
 COPY Gopkg.toml Gopkg.lock ./

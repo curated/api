@@ -9,8 +9,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/curated/api/config"
-	"github.com/curated/api/logger"
+	"github.com/curated/elastic/config"
+	"github.com/curated/elastic/logger"
 	"github.com/labstack/echo"
 	"github.com/olivere/elastic"
 )

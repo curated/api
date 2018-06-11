@@ -1,6 +1,6 @@
 package main
 
-import "github.com/curated/api/server"
+import "github.com/curated/elastic/server"
 
 func main() {
 	server.New().Start()
