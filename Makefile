@@ -6,7 +6,7 @@ dist:
 	@docker build -t curated .
 
 test:
-	@CONFIG=config/config.test.json go test ./...
+	@go test ./...
 
 run:
 	@go run main.go -logtostderr=true

@@ -2,7 +2,6 @@ package config_test
 
 import (
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/curated/elastic/config"
@@ -10,6 +9,7 @@ import (
 )
 
 func TestConfig(t *testing.T) {
+	os.Setenv("CONFIG", "config.test.json")
 	c := config.New()
 	assert.NotEmpty(t, c.Elastic.URL)
 	assert.NotEmpty(t, c.Elastic.Username)
@@ -17,16 +17,9 @@ func TestConfig(t *testing.T) {
 }
 
 func TestConfigOverride(t *testing.T) {
-	os.Setenv("CONFIG", "config/config.json")
+	os.Setenv("CONFIG", "config.json")
 	c := config.New()
 	assert.Empty(t, c.Elastic.URL)
 	assert.Empty(t, c.Elastic.Username)
 	assert.Empty(t, c.Elastic.Password)
-}
-
-func TestGetPath(t *testing.T) {
-	main := config.GetPath("main.go")
-	ct := config.GetPath("config/config_test.go")
-	assert.True(t, strings.Contains(main, "/src/github.com/curated/elastic/main.go"))
-	assert.True(t, strings.Contains(ct, "/src/github.com/curated/elastic/config/config_test.go"))
 }
