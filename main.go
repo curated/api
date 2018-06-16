@@ -1,7 +1,12 @@
 package main
 
-import "github.com/curated/elastic/server"
+import (
+	"flag"
+
+	"github.com/curated/elastic/server"
+)
 
 func main() {
+	flag.Parse()
 	server.New().Start()
 }
