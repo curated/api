@@ -15,8 +15,10 @@ import (
 )
 
 const (
-	batchSize  = 10
-	issueIndex = "issue"
+	elasticScheme   = "https"
+	elasticSniffing = false
+	batchSize       = 10
+	issueIndex      = "issue"
 )
 
 var issueSortOptions = map[string]bool{
@@ -60,8 +62,8 @@ func New() *Server {
 	cli, err := elastic.NewClient(
 		elastic.SetURL(cfg.Elastic.URL),
 		elastic.SetBasicAuth(cfg.Elastic.Username, cfg.Elastic.Password),
-		elastic.SetScheme("https"),
-		elastic.SetSniff(false),
+		elastic.SetScheme(elasticScheme),
+		elastic.SetSniff(elasticSniffing),
 	)
 
 	if err != nil {
