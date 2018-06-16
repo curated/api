@@ -11,6 +11,7 @@ import (
 
 	"github.com/curated/elastic/config"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/olivere/elastic"
 )
 
@@ -22,16 +23,14 @@ const (
 )
 
 var issueSortOptions = map[string]bool{
-	"thumbsUp":       true,
-	"thumbsDown":     true,
-	"laugh":          true,
-	"hooray":         true,
-	"confused":       true,
-	"heart":          true,
-	"repoForks":      true,
-	"repoStargazers": true,
-	"createdAt":      true,
-	"updatedAt":      true,
+	"thumbsUp":   true,
+	"thumbsDown": true,
+	"laugh":      true,
+	"hooray":     true,
+	"confused":   true,
+	"heart":      true,
+	"createdAt":  true,
+	"updatedAt":  true,
 }
 
 // Server serves HTTP requests
@@ -56,12 +55,10 @@ type IssuesResponse struct {
 }
 
 // New creates the server
-func New() *Server {
-	cfg := config.New()
-
+func New(c *config.Config) *Server {
 	cli, err := elastic.NewClient(
-		elastic.SetURL(cfg.Elastic.URL),
-		elastic.SetBasicAuth(cfg.Elastic.Username, cfg.Elastic.Password),
+		elastic.SetURL(c.Elastic.URL),
+		elastic.SetBasicAuth(c.Elastic.Username, c.Elastic.Password),
 		elastic.SetScheme(elasticScheme),
 		elastic.SetSniff(elasticSniffing),
 	)
@@ -74,8 +71,13 @@ func New() *Server {
 		Context: context.Background(),
 		Client:  cli,
 		Echo:    echo.New(),
-		Config:  cfg,
+		Config:  c,
 	}
+
+	s.Echo.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{echo.GET},
+	}))
 
 	s.Echo.GET("/issues", s.searchIssues)
 	return s
@@ -87,7 +89,7 @@ func (s *Server) Start() {
 }
 
 func (s *Server) searchIssues(c echo.Context) error {
-	req, err := s.parseIssueRequest(c)
+	req, err := s.createIssuesRequest(c)
 
 	if err != nil {
 		return c.String(http.StatusBadRequest, err.Error())
@@ -105,26 +107,10 @@ func (s *Server) searchIssues(c echo.Context) error {
 		return c.NoContent(http.StatusInternalServerError)
 	}
 
-	res := IssuesResponse{
-		Total: sr.Hits.TotalHits,
-	}
-
-	for _, hit := range sr.Hits.Hits {
-		var issue map[string]interface{}
-		err := json.Unmarshal(*hit.Source, &issue)
-
-		if err != nil {
-			glog.Errorf("Failed parsing issue: %v\n%s", err, string(*hit.Source))
-			return c.NoContent(http.StatusInternalServerError)
-		}
-
-		res.Issues = append(res.Issues, issue)
-	}
-
-	return c.JSON(http.StatusOK, res)
+	return s.createIssuesResponse(c, sr)
 }
 
-func (s *Server) parseIssueRequest(c echo.Context) (*IssuesRequest, error) {
+func (s *Server) createIssuesRequest(c echo.Context) (*IssuesRequest, error) {
 	sort := c.QueryParam("sort")
 	if !issueSortOptions[sort] {
 		return nil, fmt.Errorf("Cannot sort by '%s'", sort)
@@ -145,4 +131,24 @@ func (s *Server) parseIssueRequest(c echo.Context) (*IssuesRequest, error) {
 		Asc:  asc,
 		From: from,
 	}, nil
+}
+
+func (s *Server) createIssuesResponse(c echo.Context, sr *elastic.SearchResult) error {
+	res := IssuesResponse{
+		Total: sr.Hits.TotalHits,
+	}
+
+	for _, hit := range sr.Hits.Hits {
+		var issue map[string]interface{}
+		err := json.Unmarshal(*hit.Source, &issue)
+
+		if err != nil {
+			glog.Errorf("Failed parsing issue: %v\n%s", err, string(*hit.Source))
+			return c.NoContent(http.StatusInternalServerError)
+		}
+
+		res.Issues = append(res.Issues, issue)
+	}
+
+	return c.JSON(http.StatusOK, res)
 }
