@@ -1,7 +1,7 @@
 {
   "name": "curated",
   "type": "docker",
-  "alias": "curated.now.sh",
+  "alias": ["curated.now.sh", "octograph.now.sh"],
   "files": ["./"],
   "public": true,
   "scale": {
