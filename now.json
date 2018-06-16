@@ -5,7 +5,7 @@
   "files": ["./"],
   "public": true,
   "scale": {
-    "sfo": {
+    "sfo1": {
       "min": 1,
       "max": 3
     }
