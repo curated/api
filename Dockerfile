@@ -11,4 +11,4 @@ FROM scratch
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /app ./
 EXPOSE 1323
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["/app", "-logtostderr=true"]
