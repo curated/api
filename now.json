@@ -2,7 +2,7 @@
   "name": "curated",
   "type": "docker",
   "alias": ["curated.now.sh", "octograph.now.sh"],
-  "files": ["./", "config/config.prod.json"],
+  "files": ["./"],
   "public": true,
   "scale": {
     "sfo1": {
