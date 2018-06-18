@@ -18,7 +18,7 @@ import (
 const (
 	elasticScheme   = "https"
 	elasticSniffing = false
-	batchSize       = 100
+	batchSize       = 10
 	issueIndex      = "issue"
 )
 
