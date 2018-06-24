@@ -90,6 +90,7 @@ func (s *Server) Start() {
 
 func (s *Server) searchIssues(c echo.Context) error {
 	req, err := s.createIssuesRequest(c)
+	glog.Infof("Request: %+v", req)
 
 	if err != nil {
 		return c.String(http.StatusBadRequest, err.Error())
@@ -150,5 +151,6 @@ func (s *Server) createIssuesResponse(c echo.Context, sr *elastic.SearchResult) 
 		res.Issues = append(res.Issues, issue)
 	}
 
+	glog.Infof("Response: %+v", res)
 	return c.JSON(http.StatusOK, res)
 }
