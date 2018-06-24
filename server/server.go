@@ -151,6 +151,6 @@ func (s *Server) createIssuesResponse(c echo.Context, sr *elastic.SearchResult) 
 		res.Issues = append(res.Issues, issue)
 	}
 
-	glog.Infof("Response: %+v", res)
+	glog.Infof("Found: %d", sr.Hits.TotalHits)
 	return c.JSON(http.StatusOK, res)
 }
