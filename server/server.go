@@ -19,7 +19,6 @@ const (
 	elasticScheme   = "https"
 	elasticSniffing = false
 	batchSize       = 10
-	issueIndex      = "issue"
 )
 
 var issueSortOptions = map[string]bool{
@@ -97,7 +96,7 @@ func (s *Server) searchIssues(c echo.Context) error {
 	}
 
 	sr, err := s.Client.Search().
-		Index(issueIndex).
+		Index(s.Config.Issue.Index).
 		Sort(req.Sort, req.Asc).
 		From(req.From).
 		Size(batchSize).

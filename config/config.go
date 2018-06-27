@@ -24,6 +24,10 @@ type Config struct {
 		Username string
 		Password string
 	}
+
+	Issue struct {
+		Index string
+	}
 }
 
 // New creates config from ENV or default file at relative path to package root
