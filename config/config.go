@@ -11,11 +11,12 @@ import (
 
 const (
 	configKey   = "CONFIG"
-	defaultFile = "config/config.prod.json"
+	defaultFile = "config/dev.config.json"
 )
 
 // Config values
 type Config struct {
+	Env  string
 	Root string
 
 	Elastic struct {

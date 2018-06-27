@@ -1,7 +1,11 @@
 {
+  "Env": "sample",
   "Elastic": {
     "URL": "",
     "Username": "",
     "Password": ""
+  },
+  "Issue": {
+    "Index": "issue"
   }
 }

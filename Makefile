@@ -1,12 +1,15 @@
 default: test
 
-.PHONY: dist test run
-
-dist:
-	@docker build -t curated .
+.PHONY: test build run push
 
 test:
-	@CONFIG=config/config.test.json go test ./...
+	@CONFIG=config/test.config.json go test ./...
+
+build:
+	@docker build -t curated .
 
 run:
 	@go run main.go -logtostderr=true
+
+push:
+	@now
