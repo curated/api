@@ -23,14 +23,14 @@ const (
 )
 
 var issueSortOptions = map[string]bool{
+	"updatedAt":  true,
+	"createdAt":  true,
 	"thumbsUp":   true,
 	"thumbsDown": true,
 	"laugh":      true,
 	"hooray":     true,
 	"confused":   true,
 	"heart":      true,
-	"createdAt":  true,
-	"updatedAt":  true,
 }
 
 // Server serves HTTP requests
